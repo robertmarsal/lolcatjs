@@ -29,3 +29,6 @@ Examples:
   lolcatjs          Copy standard input to standard output.
   fortune | lolcatjs  Display a rainbow cookie.
 ```
+
+## Examples
+![lolcatjs](/assets/screenshot.png)
