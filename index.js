@@ -1,6 +1,7 @@
-var terminal = require( 'terminal-kit' ).terminal;
-var sleep    = require('sleep');
-var cursor   = require('ansi')(process.stdout);
+var terminal   = require( 'terminal-kit' ).terminal;
+var sleep      = require('sleep');
+var cursor     = require('ansi')(process.stdout);
+var LineByLineReader = require('line-by-line');
 
 var options = {
     animate: false,
@@ -63,13 +64,12 @@ var printlnAnimated = function(colorizer, line) {
         if (j % 2 === 0) {
             printlnPlain(colorizer, line);
         }
-        sleep.usleep(options.speed * 2000);
+        sleep.usleep(1/options.speed * 500000);
     }
 
     // Restore the original seed
     options.seed = seed;
 
-    process.stdout.cursorTo(0);
     printlnPlain(colorizer, line);
 }
 
@@ -85,18 +85,17 @@ var println = function(line) {
         colorizer = noColor;
     }
 
+    cursor.show();
+
     if (options.animate) {
         cursor.hide();
         printlnAnimated(colorizer, line);
-        cursor.show();
     } else {
         printlnPlain(colorizer, line);
     }
 
     process.stdout.write('\n');
-
 }
-
 
 var fromPipe = function() {
 
@@ -113,7 +112,17 @@ var fromPipe = function() {
     });
 }
 
+var fromFile = function(file) {
+
+    var lr = new LineByLineReader(file)
+    lr.on('line', function (line) {
+        options.seed += 1;
+        println(line);
+    });
+}
+
 exports.options  = options;
 exports.println  = println;
 exports.rainbow  = rainbow;
 exports.fromPipe = fromPipe;
+exports.fromFile = fromFile;

@@ -14,7 +14,9 @@ var args = minimist(process.argv.slice(2), {
         p: 'spread',
         F: 'freq',
         S: 'seed',
-        a: 'animate'
+        a: 'animate',
+        d: 'duration',
+        s: 'speed'
     }
 });
 
@@ -105,6 +107,14 @@ function init(args) {
         lolcatjs.options.animate = true;
     }
 
+    if (args.duration) {
+        lolcatjs.options.duration = args.duration;
+    }
+
+    if (args.speed) {
+        lolcatjs.options.speed = args.speed;
+    }
+
     if (args._.length === 0) {
 
         if (lolcatjs.options.seed === 0) {
@@ -112,6 +122,22 @@ function init(args) {
         }
 
         lolcatjs.fromPipe();
+    } else {
+
+        var listenStdin = false;
+
+        args._.forEach(function(file) {
+
+            if (file === '-') {
+                listenStdin = true;
+            } else {
+                lolcatjs.fromFile(file);
+            }
+        });
+
+        if (listenStdin) {
+            lolcatjs.fromPipe();
+        }
     }
 }
 
