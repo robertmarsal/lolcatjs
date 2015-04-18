@@ -2,7 +2,7 @@
 
 > For when you need the lols but don't have the rubies. 
 
-This is a node port of the famous [lolcat](https://github.com/busyloop/lolcat) gem.
+This is a node port of the famous [lolcat](https://github.com/busyloop/lolcat) gem. It implements all the original functionality and behaviour.
 
 ## Installation
 ```javascript
@@ -27,9 +27,9 @@ With no FILE, or when FILE is -, read standard input.
           --help, -h:   Show this message
 
 Examples:
-  lolcatjs f - g    Output f's contents, then stdin, then, g's contents.
-  lolcatjs          Copy standard input to standard output.
-  fortune | lolcatjs  Display a rainbow cookie.
+  lolcatjs f - g     Output f's contents, then stdin, then, g's contents.
+  lolcatjs           Copy standard input to standard output.
+  fortune | lolcatjs Display a rainbow cookie.
 ```
 
 ## Screenshot
