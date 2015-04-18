@@ -1,1 +1,2 @@
-# lolcatjs
+![lolcatjs](/assets/banner.png)
+
