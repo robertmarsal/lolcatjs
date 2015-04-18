@@ -13,7 +13,8 @@ var args = minimist(process.argv.slice(2), {
         f: 'force',
         p: 'spread',
         F: 'freq',
-        S: 'seed'
+        S: 'seed',
+        a: 'animate'
     }
 });
 
@@ -98,6 +99,10 @@ function init(args) {
 
     if (args.seed) {
         lolcatjs.options.seed = args.seed;
+    }
+
+    if (args.animate) {
+        lolcatjs.options.animate = true;
     }
 
     if (args._.length === 0) {

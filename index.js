@@ -1,6 +1,6 @@
-"use strict";
-
 var terminal = require( 'terminal-kit' ).terminal;
+var sleep    = require('sleep');
+var cursor   = require('ansi')(process.stdout);
 
 var options = {
     animate: false,
@@ -44,9 +44,37 @@ var noColor = function(char, colors) {
     process.stdout.write(char);
 }
 
+var printlnPlain = function(colorizer, line) {
+
+    for (var i = 0; i < line.length; i++) {
+        colorizer(line[i], rainbow(options.freq, options.seed + i / options.spread));
+    }
+}
+
+var printlnAnimated = function(colorizer, line) {
+
+    // Backup the seed
+    var seed = options.seed;
+
+    for (var j = 1; j < options.duration; j++) {
+        process.stdout.cursorTo(0);
+
+        options.seed += options.spread;
+        if (j % 2 === 0) {
+            printlnPlain(colorizer, line);
+        }
+        sleep.usleep(options.speed * 2000);
+    }
+
+    // Restore the original seed
+    options.seed = seed;
+
+    process.stdout.cursorTo(0);
+    printlnPlain(colorizer, line);
+}
+
 var println = function(line) {
 
-    var colors;
     var colorizer = truecolor;
 
     if (process.platform === 'win32') {
@@ -57,15 +85,18 @@ var println = function(line) {
         colorizer = noColor;
     }
 
-    for (var i = 0; i < line.length; i++) {
-
-        colors = rainbow(options.freq, options.seed + i / options.spread);
-
-        colorizer(line[i], colors);
+    if (options.animate) {
+        cursor.hide();
+        printlnAnimated(colorizer, line);
+        cursor.show();
+    } else {
+        printlnPlain(colorizer, line);
     }
 
     process.stdout.write('\n');
+
 }
+
 
 var fromPipe = function() {
 
