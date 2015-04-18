@@ -1,0 +1,24 @@
+{
+  "name": "lolcatjs",
+  "version": "1.0.0",
+  "description": "The rainbow I tastes it",
+  "main": "index.js",
+  "bin": {
+    "lolcatjs": "cli.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "lolcat",
+    "lol",
+    "cat",
+    "rainbow"
+  ],
+  "author": "Robert Boloc <robertboloc@gmail.com> (http://robertboloc.eu/)",
+  "license": "WTFPL",
+  "dependencies": {
+    "minimist": "^1.1.1",
+    "multiline": "^1.0.2"
+  }
+}
