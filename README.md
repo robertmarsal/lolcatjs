@@ -1,6 +1,8 @@
 ![lolcatjs](/assets/banner.png)
 
-For when you need the lols but don't have the rubies. This is a node port of the famous [lolcat](https://github.com/busyloop/lolcat) gem.
+> For when you need the lols but don't have the rubies. 
+
+This is a node port of the famous [lolcat](https://github.com/busyloop/lolcat) gem.
 
 ## Installation
 ```javascript
@@ -30,5 +32,11 @@ Examples:
   fortune | lolcatjs  Display a rainbow cookie.
 ```
 
-## Examples
+## Screenshot
 ![lolcatjs](/assets/screenshot.png)
+
+## Thanks
+[Nur Ortega Marsal](http://esnur.eu) for creating the banner
+
+## License
+WTFPL © [Robert Boloc](http://robertboloc.eu)
