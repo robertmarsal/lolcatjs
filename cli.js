@@ -1,3 +1,7 @@
+#!/usr/bin/env node
+
+"use strict";
+
 var lolcatjs  = require('./');
 var minimist  = require('minimist');
 var multiline = require('multiline');
@@ -39,7 +43,14 @@ Report lolcatjs translation bugs to <http://speaklolcat.com>
 
     */});
 
-    console.log(help);
+    var lines = help.split('\n');
+
+    for (var line in lines) {
+        lolcatjs.options.os += 1;
+        lolcatjs.println(lines[line]);
+    }
+
+    process.exit();
 }
 
 function version() {
@@ -60,7 +71,7 @@ function init(args) {
     }
 
     if (args._.length === 0) {
-
+        lolcatjs.fromPipe();
     }
 }
 
