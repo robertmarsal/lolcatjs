@@ -43,9 +43,9 @@ With no FILE, or when FILE is -, read standard input.
           --help, -h:   Show this message
 
 Examples:
-  lolcatjs f - g    Output f's contents, then stdin, then, g's contents.
-  lolcatjs          Copy standard input to standard output.
-  fortune | lolcatjs  Display a rainbow cookie.
+  lolcatjs f - g     Output f's contents, then stdin, then, g's contents.
+  lolcatjs           Copy standard input to standard output.
+  fortune | lolcatjs Display a rainbow cookie.
 
 Report lolcatjs bugs to <https://github.com/robertboloc/lolcatjs/issues>
 lolcatjs home page: <https://github.com/robertboloc/lolcatjs/>
