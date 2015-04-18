@@ -1,7 +1,5 @@
 "use strict";
 
-var terminal = require( 'terminal-kit' ).terminal;
-
 var options = {
     animate: false,
     duration: 12,
@@ -35,16 +33,10 @@ var println = function(line) {
 
         colors = rainbow(options.freq, options.os + i / options.spread);
 
-        terminal.colorRgb(
-            colors.red,
-            colors.green,
-            colors.blue,
-            line[i]
-        );
-
+        process.stdout.write('\x1b[38;2;' + Math.round(colors.red) + ';' + Math.round(colors.green) + ';' + Math.round(colors.blue) + 'm' + line[i]  + '\x1b[0m');
     }
 
-    terminal('\n');
+    process.stdout.write('\n');
 }
 
 exports.println = println;

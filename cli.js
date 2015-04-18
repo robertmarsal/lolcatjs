@@ -13,6 +13,9 @@ var args = minimist(process.argv.slice(2), {
     }
 });
 
+function rand(max) {
+    return Math.floor(Math.random() * (max + 1));
+}
 
 function help() {
     var help = multiline(function(){/*
@@ -43,10 +46,13 @@ Report lolcatjs translation bugs to <http://speaklolcat.com>
 
     */});
 
+    var i = 20;
+    var o = rand(256);
     var lines = help.split('\n');
 
     for (var line in lines) {
-        lolcatjs.options.os += 1;
+        i -= 1;
+        lolcatjs.options.os = o + i;
         lolcatjs.println(lines[line]);
     }
 
@@ -71,6 +77,8 @@ function init(args) {
     }
 
     if (args._.length === 0) {
+
+        lolcatjs.options.os = rand(256);
         lolcatjs.fromPipe();
     }
 }

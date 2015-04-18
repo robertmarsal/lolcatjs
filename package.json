@@ -15,11 +15,14 @@
     "cat",
     "rainbow"
   ],
-  "author": "Robert Boloc <robertboloc@gmail.com> (http://robertboloc.eu/)",
+  "author": {
+    "name": "Robert Boloc",
+    "email": "robertboloc@gmail.com",
+    "url": "http://robertboloc.eu"
+  },
   "license": "WTFPL",
   "dependencies": {
     "minimist": "^1.1.1",
-    "multiline": "^1.0.2",
-    "terminal-kit": "^0.10.0"
+    "multiline": "^1.0.2"
   }
 }
