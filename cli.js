@@ -68,6 +68,7 @@ function version() {
 
 function init(args) {
 
+
     if (args.help) {
         help();
     }
