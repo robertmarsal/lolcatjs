@@ -9,7 +9,11 @@ var multiline = require('multiline');
 var args = minimist(process.argv.slice(2), {
     alias: {
         v: 'version',
-        h: 'help'
+        h: 'help',
+        f: 'force',
+        p: 'spread',
+        F: 'freq',
+        S: 'seed'
     }
 });
 
@@ -25,8 +29,8 @@ Usage: lolcatjs [OPTION]... [FILE]...
 Concatenate FILE(s), or standard input, to standard output.
 With no FILE, or when FILE is -, read standard input.
 
-    --spread, -p <f>:   Rainbow spread (default: 3.0)
-      --freq, -F <f>:   Rainbow frequency (default: 0.1)
+    --spread, -p <f>:   Rainbow spread (default: 8.0)
+      --freq, -F <f>:   Rainbow frequency (default: 0.3)
       --seed, -S <i>:   Rainbow seed, 0 = random (default: 0)
        --animate, -a:   Enable psychedelics
   --duration, -d <i>:   Animation duration (default: 12)
@@ -52,7 +56,7 @@ Report lolcatjs translation bugs to <http://speaklolcat.com>
 
     for (var line in lines) {
         i -= 1;
-        lolcatjs.options.os = o + i;
+        lolcatjs.options.seed = o + i;
         lolcatjs.println(lines[line]);
     }
 
@@ -61,13 +65,20 @@ Report lolcatjs translation bugs to <http://speaklolcat.com>
 
 function version() {
 
-    var version = 'lolcatjs 1.0.0 (c)2015 robertboloc@gmail.com';
+    if (lolcatjs.options.seed === 0) {
+        lolcatjs.options.seed = rand(256);
+    }
 
-    console.log(version);
+    lolcatjs.println('lolcatjs 1.0.0 (c) 2015 robertboloc@gmail.com');
+
+    process.exit();
 }
 
 function init(args) {
 
+    if (process.stdout.isTTY || args.force) {
+        lolcatjs.options.colors = true;
+    }
 
     if (args.help) {
         help();
@@ -77,9 +88,24 @@ function init(args) {
         version();
     }
 
+    if (args.spread) {
+        lolcatjs.options.spread = args.spread;
+    }
+
+    if (args.freq) {
+        lolcatjs.options.freq = args.freq;
+    }
+
+    if (args.seed) {
+        lolcatjs.options.seed = args.seed;
+    }
+
     if (args._.length === 0) {
 
-        lolcatjs.options.os = rand(256);
+        if (lolcatjs.options.seed === 0) {
+            lolcatjs.options.seed = rand(256);
+        }
+
         lolcatjs.fromPipe();
     }
 }

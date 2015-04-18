@@ -5,10 +5,11 @@ var terminal = require( 'terminal-kit' ).terminal;
 var options = {
     animate: false,
     duration: 12,
-    os: 0,
+    seed: 0,
     speed: 20,
     spread: 8.0,
-    freq: 0.3
+    freq: 0.3,
+    colors: false
 }
 
 var rainbow = function(freq, i) {
@@ -24,19 +25,23 @@ var rainbow = function(freq, i) {
     }
 }
 
-var truecolor = function (text, colors) {
+var truecolor = function (char, colors) {
 
-    process.stdout.write('\x1b[38;2;' + colors.red + ';' + colors.green + ';' + colors.blue + 'm' + text + '\x1b[0m');
+    process.stdout.write('\x1b[38;2;' + colors.red + ';' + colors.green + ';' + colors.blue + 'm' + char + '\x1b[0m');
 }
 
-var fallbackColor = function (text, colors) {
+var fallbackColor = function (char, colors) {
 
     terminal.colorRgb(
         colors.red,
         colors.green,
         colors.blue,
-        text
+        char
     );
+}
+
+var noColor = function(char, colors) {
+    process.stdout.write(char);
 }
 
 var println = function(line) {
@@ -48,9 +53,13 @@ var println = function(line) {
         colorizer = fallbackColor;
     }
 
+    if (options.colors === false) {
+        colorizer = noColor;
+    }
+
     for (var i = 0; i < line.length; i++) {
 
-        colors = rainbow(options.freq, options.os + i / options.spread);
+        colors = rainbow(options.freq, options.seed + i / options.spread);
 
         colorizer(line[i], colors);
     }
@@ -67,7 +76,7 @@ var fromPipe = function() {
         var lines = data.split('\n');
 
         for (var line in lines) {
-            options.os += 1;
+            options.seed += 1;
             println(lines[line]);
         }
     });
