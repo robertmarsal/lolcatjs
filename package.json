@@ -1,6 +1,6 @@
 {
   "name": "lolcatjs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The rainbow I tastes it",
   "main": "index.js",
   "bin": {
@@ -30,7 +30,9 @@
     "line-by-line": "^0.1.3",
     "minimist": "^1.1.1",
     "multiline": "^1.0.2",
-    "sleep": "^2.0.0",
     "terminal-kit": "^0.10.2"
+  },
+  "optionalDependencies": {
+    "sleep": "^2.0.0"
   }
 }
