@@ -1,6 +1,6 @@
 {
   "name": "lolcatjs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The rainbow I tastes it",
   "main": "index.js",
   "bin": {
