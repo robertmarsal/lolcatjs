@@ -53,8 +53,8 @@ Report lolcatjs translation bugs to <http://speaklolcat.com>
 
     */});
 
-    var i = 20;
-    var o = rand(256);
+    var i     = 20;
+    var o     = rand(256);
     var lines = help.split('\n');
 
     for (var line in lines) {
