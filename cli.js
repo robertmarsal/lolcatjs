@@ -3,6 +3,7 @@
 "use strict";
 
 var lolcatjs  = require('./');
+var info      = require('./package.json');
 var minimist  = require('minimist');
 var multiline = require('multiline');
 
@@ -72,7 +73,7 @@ function version() {
         lolcatjs.options.seed = rand(256);
     }
 
-    lolcatjs.println('lolcatjs 1.0.0 (c) 2015 robertboloc@gmail.com');
+    lolcatjs.println('lolcatjs ' + info.version + ' (c) 2015 robertboloc@gmail.com');
 
     process.exit();
 }
