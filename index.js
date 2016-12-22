@@ -11,7 +11,7 @@ let sleep = null;
 try {
     sleep = require('sleep');
 } catch (error) {
-    console.error('Unable to load sleep module');
+    console.error('Unable to load the sleep module (no animations available)');
 }
 
 let options = {
