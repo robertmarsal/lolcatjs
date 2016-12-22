@@ -1,19 +1,20 @@
 "use strict";
 
-var terminal         = require( 'terminal-kit' ).terminal;
-var cursor           = require('ansi')(process.stdout);
-var reader           = require('line-by-line');
+const terminal         = require( 'terminal-kit' ).terminal;
+const cursor           = require('ansi')(process.stdout);
+const reader           = require('line-by-line');
 
+let sleep = null;
 // Because sleep is a native module, depending on the
 // platform of the user, the compilation might fail,
 // in this case fallback, and show no animations.
 try {
-    var sleep = require('sleep');
+    sleep = require('sleep');
 } catch (error) {
-    sleep = null;
+    console.error('Unable to load sleep module');
 }
 
-var options = {
+let options = {
     // To animate or not (only works if the sleep module is available)
     animate: false,
     // Duration of the animation
@@ -28,28 +29,28 @@ var options = {
     freq: 0.3,
     // To use colors for the output or not.
     colors: false
-}
+};
 
 
-var rainbow = function(freq, i) {
+let rainbow = function(freq, i) {
 
-    var red   = Math.round(Math.sin(freq * i + 0) * 127 + 128);
-    var green = Math.round(Math.sin(freq * i + 2 * Math.PI / 3) * 127 + 128);
-    var blue  = Math.round(Math.sin(freq * i + 4 * Math.PI / 3) * 127 + 128);
+    let red   = Math.round(Math.sin(freq * i + 0) * 127 + 128);
+    let green = Math.round(Math.sin(freq * i + 2 * Math.PI / 3) * 127 + 128);
+    let blue  = Math.round(Math.sin(freq * i + 4 * Math.PI / 3) * 127 + 128);
 
     return {
         red:   red,
         green: green,
         blue:  blue
     }
-}
+};
 
-var trueColor = function (char, colors) {
+let trueColor = function (char, colors) {
 
     process.stdout.write('\x1b[38;2;' + colors.red + ';' + colors.green + ';' + colors.blue + 'm' + char + '\x1b[0m');
-}
+};
 
-var fallbackColor = function (char, colors) {
+let fallbackColor = function (char, colors) {
 
     terminal.colorRgb(
         colors.red,
@@ -57,27 +58,27 @@ var fallbackColor = function (char, colors) {
         colors.blue,
         char
     );
-}
+};
 
-var noColor = function(char, colors) {
+let noColor = function(char, colors) {
     process.stdout.write(char);
-}
+};
 
-var printlnPlain = function(colorizer, line) {
+let printlnPlain = function(colorizer, line) {
 
-    for (var i = 0; i < line.length; i++) {
+    for (let i = 0; i < line.length; i++) {
         colorizer(line[i], rainbow(options.freq, options.seed + i / options.spread));
     }
-}
+};
 
-var printlnAnimated = function(colorizer, line) {
+let printlnAnimated = function(colorizer, line) {
 
     if (sleep) {
 
         // Backup the seed
-        var seed = options.seed;
+        let seed = options.seed;
 
-        for (var j = 1; j < options.duration; j++) {
+        for (let j = 1; j < options.duration; j++) {
             process.stdout.cursorTo(0);
 
             options.seed += options.spread;
@@ -95,11 +96,11 @@ var printlnAnimated = function(colorizer, line) {
     }
 
     printlnPlain(colorizer, line);
-}
+};
 
-var println = function(line) {
+let println = function(line) {
 
-    var colorizer = trueColor;
+    let colorizer = trueColor;
 
     if (process.platform === 'win32') {
         colorizer = fallbackColor;
@@ -119,31 +120,31 @@ var println = function(line) {
     }
 
     process.stdout.write('\n');
-}
+};
 
-var fromPipe = function() {
+let fromPipe = function() {
 
     process.stdin.resume();
     process.stdin.setEncoding('utf8');
     process.stdin.on('data', function(data) {
 
-        var lines = data.split('\n');
+        let lines = data.split('\n');
 
-        for (var line in lines) {
+        for (let line in lines) {
             options.seed += 1;
             println(lines[line]);
         }
     });
-}
+};
 
-var fromFile = function(file) {
+let fromFile = function(file) {
 
-    var fileReader = new reader(file)
+    let fileReader = new reader(file)
     fileReader.on('line', function (line) {
         options.seed += 1;
         println(line);
     });
-}
+};
 
 exports.options  = options;
 exports.println  = println;
