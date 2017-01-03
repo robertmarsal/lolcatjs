@@ -102,7 +102,7 @@ let println = function(line) {
 
     let colorizer = trueColor;
 
-    if (process.platform === 'win32') {
+    if (process.platform === 'win32' || process.platform === 'darwin') {
         colorizer = fallbackColor;
     }
 
