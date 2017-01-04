@@ -1,6 +1,6 @@
 "use strict";
 
-const terminal         = require( 'terminal-kit' ).terminal;
+const terminal         = require('terminal-kit').terminal;
 const cursor           = require('ansi')(process.stdout);
 const reader           = require('line-by-line');
 
@@ -31,7 +31,6 @@ let options = {
     colors: false
 };
 
-
 let rainbow = function(freq, i) {
 
     let red   = Math.round(Math.sin(freq * i + 0) * 127 + 128);
@@ -52,11 +51,14 @@ let trueColor = function (char, colors) {
 
 let fallbackColor = function (char, colors) {
 
+    // Make sure special chars used by terminal-kit are correctly escaped
+    let escapedChar = char.replace('^', '^^');
+
     terminal.colorRgb(
         colors.red,
         colors.green,
         colors.blue,
-        char
+        escapedChar
     );
 };
 
