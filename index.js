@@ -140,9 +140,17 @@ let fromPipe = function() {
 };
 
 let fromFile = function(file) {
-
     let fileReader = new reader(file)
     fileReader.on('line', function (line) {
+        options.seed += 1;
+        println(line);
+    });
+};
+
+let fromString = function(string) {
+    string = string || '';
+    let lines = string.split('\n')
+    lines.forEach(function (line) {
         options.seed += 1;
         println(line);
     });
@@ -153,3 +161,4 @@ exports.println  = println;
 exports.rainbow  = rainbow;
 exports.fromPipe = fromPipe;
 exports.fromFile = fromFile;
+exports.fromString = fromString;
