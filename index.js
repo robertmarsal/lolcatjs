@@ -140,6 +140,7 @@ let fromPipe = function() {
 };
 
 let fromFile = function(file) {
+
     let fileReader = new reader(file)
     fileReader.on('line', function (line) {
         options.seed += 1;
@@ -148,6 +149,7 @@ let fromFile = function(file) {
 };
 
 let fromString = function(string) {
+
     string = string || '';
     let lines = string.split('\n')
     lines.forEach(function (line) {

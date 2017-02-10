@@ -1,6 +1,6 @@
 ![lolcatjs](/assets/banner.png)
 
-> For when you need the lols but don't have the rubies. 
+> For when you need the lols but don't have the rubies.
 
 This is a node port of the famous [lolcat](https://github.com/busyloop/lolcat) gem. It implements all the original functionality and behaviour.
 
@@ -10,6 +10,8 @@ npm install -g lolcatjs
 ```
 
 ## Usage
+
+**Command Line **
 ```javascript
 lolcatjs [OPTION]... [FILE]...
 
@@ -31,6 +33,17 @@ Examples:
   lolcatjs           Copy standard input to standard output.
   fortune | lolcatjs Display a rainbow cookie.
 ```
+
+** NPM Module **
+```javascript
+const lolcatjs = require('lolcatjs');
+
+lolcatjs.options.seed = Math.round(Math.random() * 1000);
+lolcatjs.options.colors = true;
+
+lolcatjs.fromString('I can has Cheezburger?');
+```
+
 
 ## Screenshot
 ![lolcatjs](/assets/screenshot.png)
