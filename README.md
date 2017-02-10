@@ -11,7 +11,7 @@ npm install -g lolcatjs
 
 ## Usage
 
-**Command Line **
+**Command Line**
 ```javascript
 lolcatjs [OPTION]... [FILE]...
 
@@ -34,7 +34,7 @@ Examples:
   fortune | lolcatjs Display a rainbow cookie.
 ```
 
-** NPM Module **
+**NPM Module**
 ```javascript
 const lolcatjs = require('lolcatjs');
 
