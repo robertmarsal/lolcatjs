@@ -145,6 +145,7 @@ let fromFile = function(file) {
     fileReader.on('line', function (line) {
         options.seed += 1;
         println(line);
+        cursor.show();
     });
 };
 
@@ -155,6 +156,7 @@ let fromString = function(string) {
     lines.forEach(function (line) {
         options.seed += 1;
         println(line);
+        cursor.show();
     });
 };
 
