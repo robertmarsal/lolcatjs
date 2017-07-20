@@ -2,7 +2,8 @@
 
 const terminal         = require('terminal-kit').terminal;
 const cursor           = require('ansi')(process.stdout);
-const reader           = require('line-by-line');
+const Reader           = require('line-by-line');
+const supportsColor    = require('supports-color');
 
 let sleep = null;
 // Because sleep is a native module, depending on the
@@ -101,27 +102,26 @@ let printlnAnimated = function(colorizer, line) {
 };
 
 let println = function(line) {
+  let colorizer = noColor;
 
-    let colorizer = trueColor;
+  if (supportsColor) {
+    colorizer = fallbackColor;
+  }
 
-    if (process.platform === 'win32' || process.platform === 'darwin') {
-        colorizer = fallbackColor;
-    }
+  if (supportsColor.has16m) {
+    colorizer = trueColor;
+  }
 
-    if (options.colors === false) {
-        colorizer = noColor;
-    }
+  cursor.show();
 
-    cursor.show();
+  if (options.animate) {
+    cursor.hide();
+    printlnAnimated(colorizer, line);
+  } else {
+    printlnPlain(colorizer, line);
+  }
 
-    if (options.animate) {
-        cursor.hide();
-        printlnAnimated(colorizer, line);
-    } else {
-        printlnPlain(colorizer, line);
-    }
-
-    process.stdout.write('\n');
+  process.stdout.write('\n');
 };
 
 let fromPipe = function() {
@@ -141,10 +141,11 @@ let fromPipe = function() {
 
 let fromFile = function(file) {
 
-    let fileReader = new reader(file)
+    let fileReader = new Reader(file)
     fileReader.on('line', function (line) {
         options.seed += 1;
         println(line);
+        cursor.show()
     });
 };
 
@@ -155,6 +156,7 @@ let fromString = function(string) {
     lines.forEach(function (line) {
         options.seed += 1;
         println(line);
+        cursor.show()
     });
 };
 
