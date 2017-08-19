@@ -6,6 +6,10 @@
   "bin": {
     "lolcatjs": "cli.js"
   },
+  "files": [
+    "index.js",
+    "cli.js"
+  ],
   "bugs": {
     "url": "https://github.com/robertboloc/lolcatjs/issues"
   },
