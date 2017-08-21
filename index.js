@@ -1,9 +1,8 @@
 "use strict";
 
-const terminal         = require('terminal-kit').terminal;
 const cursor           = require('ansi')(process.stdout);
 const Reader           = require('line-by-line');
-const supportsColor    = require('supports-color');
+const chalk            = require('chalk');
 
 let sleep = null;
 // Because sleep is a native module, depending on the
@@ -45,36 +44,18 @@ let rainbow = function(freq, i) {
     }
 };
 
-let trueColor = function (char, colors) {
-
-    process.stdout.write('\x1b[38;2;' + colors.red + ';' + colors.green + ';' + colors.blue + 'm' + char + '\x1b[0m');
+let colorize = function(char, colors) {
+    process.stdout.write(chalk.rgb(colors.red, colors.green, colors.blue)(char));
 };
 
-let fallbackColor = function (char, colors) {
-
-    // Make sure special chars used by terminal-kit are correctly escaped
-    let escapedChar = char.replace('^', '^^');
-
-    terminal.colorRgb(
-        colors.red,
-        colors.green,
-        colors.blue,
-        escapedChar
-    );
-};
-
-let noColor = function(char, colors) {
-    process.stdout.write(char);
-};
-
-let printlnPlain = function(colorizer, line) {
+let printlnPlain = function(colorize, line) {
 
     for (let i = 0; i < line.length; i++) {
-        colorizer(line[i], rainbow(options.freq, options.seed + i / options.spread));
+        colorize(line[i], rainbow(options.freq, options.seed + i / options.spread));
     }
 };
 
-let printlnAnimated = function(colorizer, line) {
+let printlnAnimated = function(colorize, line) {
 
     if (sleep) {
 
@@ -87,7 +68,7 @@ let printlnAnimated = function(colorizer, line) {
             options.seed += options.spread;
 
             if (j % 2 === 0) {
-                printlnPlain(colorizer, line);
+                printlnPlain(colorize, line);
             }
 
             sleep.usleep(1/options.speed * 500000);
@@ -98,27 +79,17 @@ let printlnAnimated = function(colorizer, line) {
 
     }
 
-    printlnPlain(colorizer, line);
+    printlnPlain(colorize, line);
 };
 
 let println = function(line) {
-  let colorizer = noColor;
-
-  if (supportsColor) {
-    colorizer = fallbackColor;
-  }
-
-  if (supportsColor.has16m) {
-    colorizer = trueColor;
-  }
-
   cursor.show();
 
   if (options.animate) {
     cursor.hide();
-    printlnAnimated(colorizer, line);
+    printlnAnimated(colorize, line);
   } else {
-    printlnPlain(colorizer, line);
+    printlnPlain(colorize, line);
   }
 
   process.stdout.write('\n');
