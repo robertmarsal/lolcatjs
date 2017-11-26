@@ -27,8 +27,6 @@ let options = {
     spread: 8.0,
     // Frequency of the rainbow colors
     freq: 0.3,
-    // To use colors for the output or not.
-    colors: false
 };
 
 let rainbow = function(freq, i) {

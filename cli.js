@@ -4,8 +4,10 @@
 
 var lolcatjs  = require('./');
 var info      = require('./package.json');
+var chalk     = require('chalk');
 var minimist  = require('minimist');
 var multiline = require('multiline');
+var supportsColor = require('supports-color');
 
 var args = minimist(process.argv.slice(2), {
     alias: {
@@ -80,8 +82,9 @@ function version() {
 
 function init(args) {
 
-    if (process.stdout.isTTY || args.force) {
-        lolcatjs.options.colors = true;
+    if (args.force) {
+      chalk.enabled = true;
+      chalk.level = supportsColor.supportsColor({isTTY: true}).level;
     }
 
     if (args.help) {
