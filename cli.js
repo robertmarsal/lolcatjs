@@ -127,21 +127,14 @@ function init(args) {
 
         lolcatjs.fromPipe();
     } else {
-
-        var listenStdin = false;
-
+        var promise = Promise.resolve();
         args._.forEach(function(file) {
-
             if (file === '-') {
-                listenStdin = true;
+                promise = promise.then(() => lolcatjs.fromPipe());
             } else {
-                lolcatjs.fromFile(file);
+                promise = promise.then(() => lolcatjs.fromFile(file));
             }
         });
-
-        if (listenStdin) {
-            lolcatjs.fromPipe();
-        }
     }
 }
 

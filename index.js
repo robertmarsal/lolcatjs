@@ -106,6 +106,7 @@ let fromPipe = function() {
             println(lines[line]);
         }
     });
+    return new Promise(resolve => process.stdin.on('end', resolve));
 };
 
 let fromFile = function(file) {
@@ -116,6 +117,7 @@ let fromFile = function(file) {
         println(line);
         cursor.show();
     });
+    return new Promise(resolve => fileReader.on('end', resolve));
 };
 
 let fromString = function(string) {
