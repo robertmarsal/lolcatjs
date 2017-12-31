@@ -27,8 +27,6 @@ let options = {
     spread: 8.0,
     // Frequency of the rainbow colors
     freq: 0.3,
-    // To use colors for the output or not.
-    colors: false
 };
 
 let rainbow = function(freq, i) {
@@ -108,6 +106,7 @@ let fromPipe = function() {
             println(lines[line]);
         }
     });
+    return new Promise(resolve => process.stdin.on('end', resolve));
 };
 
 let fromFile = function(file) {
@@ -118,6 +117,7 @@ let fromFile = function(file) {
         println(line);
         cursor.show();
     });
+    return new Promise(resolve => fileReader.on('end', resolve));
 };
 
 let fromString = function(string) {
