@@ -4,7 +4,7 @@
   "description": "The rainbow I tastes it",
   "main": "index.js",
   "bin": {
-    "lolcatjs": "cli.js"
+    "lolcat": "cli.js"
   },
   "files": [
     "index.js",
@@ -41,6 +41,6 @@
     "sleep": "^5.0.0"
   },
   "engines": {
-    "node": "^6.9"
+    "node": ">=6.9"
   }
 }
