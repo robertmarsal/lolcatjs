@@ -13,7 +13,7 @@ npm install -g lolcatjs
 
 **Command Line**
 ```javascript
-lolcatjs [OPTION]... [FILE]...
+lolcat [OPTION]... [FILE]...
 
 Concatenate FILE(s), or standard input, to standard output.
 With no FILE, or when FILE is -, read standard input.
@@ -29,9 +29,9 @@ With no FILE, or when FILE is -, read standard input.
           --help, -h:   Show this message
 
 Examples:
-  lolcatjs f - g     Output f's contents, then stdin, then, g's contents.
-  lolcatjs           Copy standard input to standard output.
-  fortune | lolcatjs Display a rainbow cookie.
+  lolcat f - g          Output f's contents, then stdin, then, g's contents.
+  lolcat                Copy standard input to standard output.
+  fortune | lolcat      Display a rainbow cookie.
 ```
 
 **NPM Module**
