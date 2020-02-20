@@ -6,7 +6,6 @@ var lolcatjs  = require('./');
 var info      = require('./package.json');
 var chalk     = require('chalk');
 var minimist  = require('minimist');
-var multiline = require('multiline');
 var supportsColor = require('supports-color');
 
 var args = minimist(process.argv.slice(2), {
@@ -28,8 +27,7 @@ function rand(max) {
 }
 
 function help() {
-    var help = multiline(function(){/*
-
+    var help = `
 Usage: lolcatjs [OPTION]... [FILE]...
 
 Concatenate FILE(s), or standard input, to standard output.
@@ -52,9 +50,7 @@ Examples:
 
 Report lolcatjs bugs to <https://github.com/robertboloc/lolcatjs/issues>
 lolcatjs home page: <https://github.com/robertboloc/lolcatjs/>
-Report lolcatjs translation bugs to <http://speaklolcat.com>
-
-    */});
+Report lolcatjs translation bugs to <http://speaklolcat.com>`;
 
     var i     = 20;
     var o     = rand(256);
