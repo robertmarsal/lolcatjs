@@ -105,6 +105,7 @@ let fromPipe = function() {
             options.seed += 1;
             println(lines[line]);
         }
+        cursor.show();
     });
     return new Promise(resolve => process.stdin.on('end', resolve));
 };
