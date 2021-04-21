@@ -48,8 +48,8 @@ Examples:
   lolcatjs           Copy standard input to standard output.
   fortune | lolcatjs Display a rainbow cookie.
 
-Report lolcatjs bugs to <https://github.com/robertboloc/lolcatjs/issues>
-lolcatjs home page: <https://github.com/robertboloc/lolcatjs/>
+Report lolcatjs bugs to <https://github.com/robertmarsal/lolcatjs/issues>
+lolcatjs home page: <https://github.com/robertmarsal/lolcatjs/>
 Report lolcatjs translation bugs to <http://speaklolcat.com>`;
 
     var i     = 20;
@@ -71,7 +71,7 @@ function version() {
         lolcatjs.options.seed = rand(256);
     }
 
-    lolcatjs.println('lolcatjs ' + info.version + ' (c) 2015 robertboloc@gmail.com');
+    lolcatjs.println('lolcatjs ' + info.version + ' (c) 2015 Robert Marsal');
 
     process.exit();
 }

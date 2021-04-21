@@ -49,7 +49,7 @@ lolcatjs.fromString('I can has Cheezburger?');
 ![lolcatjs](/assets/screenshot.png)
 
 ## Thanks
-[Nur Ortega Marsal](http://esnur.eu) for creating the banner
+Nur Ortega Marsal for creating the banner
 
 ## License
-WTFPL © [Robert Boloc](http://robertboloc.eu)
+WTFPL © Robert Marsal

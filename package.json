@@ -1,6 +1,6 @@
 {
   "name": "lolcatjs",
-  "version": "2.4.0",
+  "version": "2.4.1",
   "description": "The rainbow I tastes it",
   "main": "index.js",
   "bin": {
@@ -11,7 +11,7 @@
     "cli.js"
   ],
   "bugs": {
-    "url": "https://github.com/robertboloc/lolcatjs/issues"
+    "url": "https://github.com/robertmarsal/lolcatjs/issues"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -24,9 +24,7 @@
     "rainbow"
   ],
   "author": {
-    "name": "Robert Boloc",
-    "email": "robertboloc@gmail.com",
-    "url": "http://robertboloc.eu"
+    "name": "Robert Marsal"
   },
   "license": "WTFPL",
   "dependencies": {
