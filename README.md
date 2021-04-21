@@ -46,7 +46,7 @@ lolcatjs.fromString('I can has Cheezburger?');
 
 
 ## Screenshot
-![lolcatjs](/assets/screenshot.png)
+![lolcatjs](/assets/screenshot-v2.png)
 
 ## Thanks
 Nur Ortega Marsal for creating the banner
