@@ -18,6 +18,7 @@ var args = minimist(process.argv.slice(2), {
         S: 'seed',
         a: 'animate',
         d: 'duration',
+        D: 'debug',
         s: 'speed'
     }
 });
@@ -41,6 +42,7 @@ With no FILE, or when FILE is -, read standard input.
      --speed, -s <f>:   Animation speed (default: 20.0)
          --force, -f:   Force color even when stdout is not a tty
        --version, -v:   Print version and exit
+         --debug, -D:   Display error messages, if any (default: false)
           --help, -h:   Show this message
 
 Examples:
@@ -71,7 +73,7 @@ function version() {
         lolcatjs.options.seed = rand(256);
     }
 
-    lolcatjs.println('lolcatjs ' + info.version + ' (c) 2015 Robert Marsal');
+    lolcatjs.println('lolcatjs ' + info.version + ' (c) 2015-2023 Robert Marsal');
 
     process.exit();
 }
@@ -114,6 +116,12 @@ function init(args) {
     if (args.speed) {
         lolcatjs.options.speed = args.speed;
     }
+
+    if (args.debug) {
+        lolcatjs.options.debug = Boolean(args.debug);
+    }
+
+    lolcatjs.init();
 
     if (args._.length === 0) {
 
