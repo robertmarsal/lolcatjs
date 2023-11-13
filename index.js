@@ -4,15 +4,8 @@ const cursor           = require('ansi')(process.stdout);
 const Reader           = require('line-by-line');
 const chalk            = require('chalk');
 
+// sleep will be loaded by the init function (if available)
 let sleep = null;
-// Because sleep is a native module, depending on the
-// platform of the user, the compilation might fail,
-// in this case fallback, and show no animations.
-try {
-    sleep = require('sleep');
-} catch (error) {
-    console.error('Unable to load the sleep module (no animations available)');
-}
 
 const options = {
     // To animate or not (only works if the sleep module is available)
@@ -27,6 +20,8 @@ const options = {
     spread: 8.0,
     // Frequency of the rainbow colors
     freq: 0.3,
+    // Whether to display error messages or not
+    debug: false,
 };
 
 const rainbow = function(freq, i) {
@@ -132,9 +127,25 @@ const fromString = function(string) {
     });
 };
 
+const init = function() {
+    // Because sleep is a native module, depending on the
+    // platform of the user, the compilation might fail,
+    // in this case fallback, and show no animations.
+    try {
+        sleep = require('sleep');
+    } catch (error) {
+        if (options.debug) {
+            console.error('The sleep module is not available, animations will be disabled.', error);
+        }
+    }
+
+    return null;
+}
+
 exports.options  = options;
 exports.println  = println;
 exports.rainbow  = rainbow;
 exports.fromPipe = fromPipe;
 exports.fromFile = fromFile;
 exports.fromString = fromString;
+exports.init = init;

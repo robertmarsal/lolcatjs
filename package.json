@@ -35,7 +35,7 @@
     "supports-color": "^7.1.0"
   },
   "optionalDependencies": {
-    "sleep": "^6.1.0"
+    "sleep": "^6.3.0"
   },
   "engines": {
     "node": ">=6.9"
